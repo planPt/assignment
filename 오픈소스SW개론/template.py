@@ -2,21 +2,34 @@
 #https://github.com/planPt/assignment.git
 
 import sys
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
 
 def load_dataset(dataset_path):
 	#To-Do: Implement this function
+    data_df=pd.read_csv('dataset_path')
 
 def dataset_stat(dataset_df):	
 	#To-Do: Implement this function
+    dataset_df.groupby("target").size()
 
 def split_dataset(dataset_df, testset_size):
 	#To-Do: Implement this function
+    X=dataset_df.drop(columns="target",axis=1)
+    y=dataset_df["target"]
+    return train_test_split(X,y,test_size=testset_size, ramdom_state=2)
 
 def decision_tree_train_test(x_train, x_test, y_train, y_test):
 	#To-Do: Implement this function
+    dt_cls=DecisionTreeClassifier()
+    dt_cls.fit(x_train,y_train)
+    return accuracy_score(dt_cls.predict(x_test),y_test)
 
 def random_forest_train_test(x_train, x_test, y_train, y_test):
 	#To-Do: Implement this function
+    rf_cls=RandomForestClassifier()
+    return accuracy_score(rf_cls.predict(x_test),y_test)
 
 def svm_train_test(x_train, x_test, y_train, y_test):
 	#To-Do: Implement this function
